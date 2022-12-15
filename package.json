@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@binance/connector": "^2.0.0-rc.4",
+    "binance-connector": "^1.0.30",
     "express": "^4.18.2"
   }
 }
