@@ -27,13 +27,13 @@ app.post('/newOrder', async (req, res) => {
 
     console.log('body request: ', req.body.symbol, req.body.side, req.body.type, req.body.options)
 
-    const client = new Spot(req.body.apiKey, req.body.secretKey, { baseURL: 'https://api.binance.com' });
+    const client = new Spot(req.body.apiKey, req.body.secretKey, { baseURL: req.body.url });
     
     let order = await client.newOrder(req.body.symbol, req.body.side, req.body.type, req.body.options)
     
     console.log(order.data)
 
-    res.json(order.data)
+    res.status(200).send(order.data)
   } catch(err) {
     console.log('err', err.response.data)
     res.status(500).send(err.response.data)
