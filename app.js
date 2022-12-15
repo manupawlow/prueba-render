@@ -12,8 +12,6 @@ app.get('/', (req, res) => {
 
 app.get('/wallet', async (req, res) => {
   try {
-    console.log(req.query.apiKey,  req.query.secretKey)
-
     const client = new Spot(req.query.apiKey,  req.query.secretKey, { baseURL: 'https://api.binance.com' });
     const walletResponse = await client.account();
     // console.log('wallet data', walletResponse.data.balances)
@@ -26,10 +24,15 @@ app.get('/wallet', async (req, res) => {
 
 app.post('/newOrder', async (req, res) => {
   try {
+
+    console.log('body request: ', req.body.symbol, req.body.side, req.body.type, req.body.options)
+
     const client = new Spot(req.body.apiKey, req.body.secretKey, { baseURL: 'https://api.binance.com' });
     
     let order = await client.newOrder(req.body.symbol, req.body.side, req.body.type, req.body.options)
     
+    console.log(order.data)
+
     res.json(order.data)
   } catch(err) {
     console.log('err', err.response.data)
