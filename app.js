@@ -25,7 +25,7 @@ app.get('/wallet', async (req, res) => {
 app.post('/newOrder', async (req, res) => {
   try {
 
-    console.log('body request: ', req.body.symbol, req.body.side, req.body.type, req.body.options)
+    console.log('body request: ', req.body)
 
     const client = new Spot(req.body.apiKey, req.body.secretKey, { baseURL: req.body.url });
     
